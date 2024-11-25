@@ -39,14 +39,10 @@ export const loginUser = createAsyncThunk(
 );
 
 export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
-  logoutApi()
-    .then(() => {
-      localStorage.clear();
-      deleteCookie('accessToken');
-    })
-    .catch(() => {
-      console.log('Ошибка выполнения выхода');
-    });
+  logoutApi().then(() => {
+    localStorage.clear();
+    deleteCookie('accessToken');
+  });
 });
 
 export const updateUser = createAsyncThunk(
@@ -114,7 +110,7 @@ const userSlice = createSlice({
       })
       .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
-        state.isChecked = false;
+        state.loading = false;
       })
       .addCase(logoutUser.rejected, (state) => {
         state.loading = false;
@@ -128,7 +124,6 @@ const userSlice = createSlice({
       .addCase(updateUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload.user;
-        state.isChecked = true;
       })
       .addCase(updateUser.rejected, (state) => {
         state.loading = false;

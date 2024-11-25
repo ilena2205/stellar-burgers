@@ -10,11 +10,7 @@ import { getIngredients, selectLoading } from '../../slices/ingredientsSlice';
 
 export const ConstructorPage: FC = () => {
   const isIngredientsLoading = useSelector(selectLoading);
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
   return (
     <>
       {isIngredientsLoading ? (

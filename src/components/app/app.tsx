@@ -13,17 +13,14 @@ import '../../index.css';
 import styles from './app.module.css';
 
 import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
-import {
-  Navigate,
-  Route,
-  Routes,
-  useLocation,
-  useNavigate
-} from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from '../../services/store';
 import { ProtectedRoute } from '../../services/protectedRoute';
 import { checkUserAuth } from '../../slices/userSlice';
+import { getIngredients } from '../../slices/ingredientsSlice';
+import { getFeeds } from '../../slices/feedSlice';
+import { getOrders } from '../../slices/orderSlice';
 
 const App = () => {
   const navigate = useNavigate();
@@ -33,6 +30,9 @@ const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(checkUserAuth());
+    dispatch(getIngredients());
+    dispatch(getFeeds());
+    dispatch(getOrders());
   }, []);
 
   return (
@@ -89,6 +89,17 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <ProfileOrders />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route path='/feed/:number' element={<OrderInfo />} />
+          <Route path='/ingredients/:id' element={<IngredientDetails />} />
+          <Route
+            path='/profile/orders/:number'
+            element={
+              <ProtectedRoute>
+                <OrderInfo />
               </ProtectedRoute>
             }
           />
