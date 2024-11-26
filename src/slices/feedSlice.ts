@@ -23,9 +23,7 @@ const initialState: FeedsState = {
 };
 
 // Асинхронная функция для получения данных
-export const getFeeds = createAsyncThunk('feeds/getFeeds', async () =>
-  getFeedsApi()
-);
+export const getFeeds = createAsyncThunk('feeds/getFeeds', getFeedsApi);
 
 export const feedsSlice = createSlice({
   name: 'feeds',

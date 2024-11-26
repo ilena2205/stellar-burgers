@@ -17,7 +17,7 @@ const initialState: IngredientsState = {
 // Асинхронная функция для получения данных
 export const getIngredients = createAsyncThunk(
   'ingredients/getIngredients',
-  async () => getIngredientsApi()
+  getIngredientsApi
 );
 
 export const ingredientsSlice = createSlice({

@@ -45,10 +45,7 @@ export const logoutUser = createAsyncThunk('user/logoutUser', async () => {
   });
 });
 
-export const updateUser = createAsyncThunk(
-  'user/updateUser',
-  async (user: Partial<TRegisterData>) => updateUserApi(user)
-);
+export const updateUser = createAsyncThunk('user/updateUser', updateUserApi);
 
 export const registerUser = createAsyncThunk(
   'user/registerUser',

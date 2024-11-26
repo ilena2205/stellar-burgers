@@ -25,9 +25,8 @@ const initialState: OrdersState = {
 };
 
 // Асинхронная функция для получения заказов
-export const getOrders = createAsyncThunk('orders/getOrders', async () =>
-  getOrdersApi()
-);
+export const getOrders = createAsyncThunk('orders/getOrders', getOrdersApi);
+
 // Асинхронная функция для создания заказа
 export const createOrder = createAsyncThunk(
   'orders/createOrder',
@@ -39,7 +38,7 @@ export const createOrder = createAsyncThunk(
 // Асинхронная функция для получения заказа по номеру
 export const getOrder = createAsyncThunk(
   'orders/getOrder',
-  async (data: number) => getOrderByNumberApi(data)
+  getOrderByNumberApi
 );
 
 const ordersSlice = createSlice({
@@ -86,7 +85,7 @@ const ordersSlice = createSlice({
       })
       .addCase(getOrder.fulfilled, (state, action) => {
         state.loading = false;
-        state.orderRequest = true;
+        state.orderRequest = false;
         state.OrderData = action.payload.orders[0];
       })
       .addCase(getOrder.rejected, (state, action) => {

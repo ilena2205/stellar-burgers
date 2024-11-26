@@ -31,8 +31,6 @@ const App = () => {
   useEffect(() => {
     dispatch(checkUserAuth());
     dispatch(getIngredients());
-    dispatch(getFeeds());
-    dispatch(getOrders());
   }, []);
 
   return (
