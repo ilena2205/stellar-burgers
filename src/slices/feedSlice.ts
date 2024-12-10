@@ -12,7 +12,7 @@ type FeedsState = {
   error: string | null;
 };
 
-const initialState: FeedsState = {
+export const initialState: FeedsState = {
   orders: [],
   feeds: {
     total: 0,
@@ -41,7 +41,7 @@ export const feedsSlice = createSlice({
         state.feeds.total = action.payload.total;
         state.feeds.totalToday = action.payload.totalToday;
       })
-      .addCase(getFeeds.rejected, (state, action) => {
+      .addCase(getFeeds.rejected, (state) => {
         state.isFeedsLoading = false;
         state.error = 'Ошибка';
       });
