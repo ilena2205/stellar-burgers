@@ -1,0 +1,23 @@
+{
+    "success": true,
+    "name": "test",
+    "order": {
+        "_id": "67461983b27b06001c3eb4cc",
+        "status": "done",
+        "name": "Флюоресцентный люминесцентный био-марсианский бургер",
+        "createdAt": "2024-11-26T18:54:59.770Z",
+        "updatedAt": "2024-11-26T18:55:00.621Z",
+        "number": 60696,
+        "price": 3388,
+        "ingredients": ["643d69a5c3f7b9001cfa093d",
+                        "643d69a5c3f7b9001cfa0941",
+                        "643d69a5c3f7b9001cfa093e",
+                        "643d69a5c3f7b9001cfa093d"],
+        "owner": {
+            "email": "test@test.test",
+            "name": "test",
+            "createdAt": "2024-11-26T18:54:59.770Z",
+            "updatedAt": "2024-11-26T18:55:00.621Z"
+      }
+    }
+  }
