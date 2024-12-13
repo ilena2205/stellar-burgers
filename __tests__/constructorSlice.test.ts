@@ -58,73 +58,63 @@ describe("Слайс для constructor", () => {
         jest.clearAllMocks(); // Очищаем мокированные данные
       });
 
-    describe("Reducer: addIngredientNotBun", () => {
+    test("должен добавлять ингредиент, не булку", () => {
         const InitialConstructorState = {
             ingredients: [],
             bun: null
         }
-        test("должен добавлять ингредиент, не булку", () => {
-            const newState = burgerConstructorSliceReducer(InitialConstructorState, addIngredient(ingredientMain));
-            const newObject = { ...newState.ingredients[0] } as Record<string, any>;
-            delete newObject['id'];
+        const newState = burgerConstructorSliceReducer(InitialConstructorState, addIngredient(ingredientMain));
+        const newObject = { ...newState.ingredients[0] } as Record<string, any>;
+        delete newObject['id'];
       
-            const initialObject = { ...ingredientMain } as Record<string, any>;
-            delete initialObject['id'];
+        const initialObject = { ...ingredientMain } as Record<string, any>;
+        delete initialObject['id'];
 
-            expect(newObject).toEqual(initialObject)
-        })
+        expect(newObject).toEqual(initialObject)
     });
 
-    describe("Reducer: addIngredientBun", () => {
+    test("должен добавлять булку", () => {
         const InitialConstructorState = {
             ingredients: [ingredientSauce],
             bun: null
         }
-        test("должен добавлять булку", () => {
-            const newState = burgerConstructorSliceReducer(InitialConstructorState, addIngredient(ingredientBun));
-            const newObject = { ...newState.bun } as Record<string, any>;
-            delete newObject['id'];
+        const newState = burgerConstructorSliceReducer(InitialConstructorState, addIngredient(ingredientBun));
+        const newObject = { ...newState.bun } as Record<string, any>;
+        delete newObject['id'];
       
-            const initialObject = { ...ingredientBun } as Record<string, any>;
-            delete initialObject['id'];
-            expect(newState.ingredients).toEqual([ingredientSauce]);
-            expect(newObject).toEqual(initialObject);
-        })
+        const initialObject = { ...ingredientBun } as Record<string, any>;
+        delete initialObject['id'];
+        expect(newState.ingredients).toEqual([ingredientSauce]);
+        expect(newObject).toEqual(initialObject);
     });
 
-    describe("Reducer: deleteIngredient", () => {
+    test("должен удалять ингредиент", () => {
         const InitialConstructorState = {
             ingredients: [ingredientSauce, ingredientMain],
             bun: null
         }
-        test("должен удалять ингредиент", () => {
-            const newState = burgerConstructorSliceReducer(InitialConstructorState, deleteIngredient(ingredientSauce.id));
-            expect(newState.ingredients[0]).toEqual(ingredientMain);
-            expect(newState.bun).toBeNull();
-        })
+        const newState = burgerConstructorSliceReducer(InitialConstructorState, deleteIngredient(ingredientSauce.id));
+        expect(newState.ingredients[0]).toEqual(ingredientMain);
+        expect(newState.bun).toBeNull();
     });
 
-    describe("Reducer: nullIngredients", () => {
+    test("обнуление конструктора", () => {
         const InitialConstructorState = {
             ingredients: [ingredientSauce, ingredientMain],
             bun: ingredientBun
         }
-        test("обнуление конструктора", () => {
-            const newState = burgerConstructorSliceReducer(InitialConstructorState, nullIngredients());
-            expect(newState.ingredients).toHaveLength(0);
-            expect(newState.bun).toBeNull();
-        })
-    })
+        const newState = burgerConstructorSliceReducer(InitialConstructorState, nullIngredients());
+        expect(newState.ingredients).toHaveLength(0);
+        expect(newState.bun).toBeNull();
+    });
 
-    describe("Reducer: changeIngredientsPlace", () => {
+    test("должен правильно менять порядок ингредиентов", () => {
         const InitialIngredState = {
             ingredients: [ingredientSauce, ingredientMain],
             bun: null
         }
-      test("должен правильно менять порядок ингредиентов", () => {
-            const newState = burgerConstructorSliceReducer(InitialIngredState, changeIngredientsPlace({ current: 0, next: 1 }));
-            expect(newState.ingredients).toEqual([ingredientMain, ingredientSauce]);
-      })
+        const newState = burgerConstructorSliceReducer(InitialIngredState, changeIngredientsPlace({ current: 0, next: 1 }));
+        expect(newState.ingredients).toEqual([ingredientMain, ingredientSauce]);
     });
 })
 

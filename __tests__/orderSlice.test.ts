@@ -23,7 +23,8 @@ const ordersData = {
 
 
 describe("Слайс для orders", () => {
-    describe("Очистка данных", () => {
+
+    test("обнуление данных", () => {
         const InitialOrdersState = {
             orders: [],
             orderId: null,
@@ -32,10 +33,8 @@ describe("Слайс для orders", () => {
             OrderData: ordersData.orders[0],
             error: null
         };
-        test("обнуление данных", () => {
-            const newState = orderSliceReducer(InitialOrdersState, clearData());
-            expect(newState.OrderData).toBeNull();
-        })
+        const newState = orderSliceReducer(InitialOrdersState, clearData());
+        expect(newState.OrderData).toBeNull();
     });
 
     describe("Запрос для получения orders: getOrders", () => {
